@@ -26,23 +26,23 @@
 	}
  }
  
- void	sswap(t_list *lsta, t_list *lstb)
+ void	sswap(t_list *a, t_list *b)
  {
  	t_list	*next;
 	int	*data;	
 
-	if (lsta->next)
+	if (a->next)
 	{
-		next = lsta->next;
-		data = lsta->content;
-		lsta->content = next->content;
+		next = a->next;
+		data = a->content;
+		a->content = next->content;
 		next->content = data;
 	}
-	if (lstb->next)
+	if (b->next)
 	{
-		next = lstb->next;
-		data = lstb->content;
-		lstb->content = next->content;
+		next = b->next;
+		data = b->content;
+		b->content = next->content;
 		next->content = data;
 	}
  }

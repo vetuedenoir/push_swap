@@ -6,7 +6,7 @@
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 19:02:32 by kscordel          #+#    #+#             */
-/*   Updated: 2023/01/18 19:42:21 by kscordel         ###   ########.fr       */
+/*   Updated: 2023/01/20 18:27:36 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,17 @@ void	*free_tt(char **ts);
 void	free_lc(t_list *lst);
 long	ft_atol(const char *str);
 void	ft_print_lst(t_list *lst);
+void	print_pile_ab(t_list *a, t_list *b);
 
 void	swap(t_list *list);
-void	push(t_list *lstplus, t_list *lstmoins);
+void	sswap(t_list *a, t_list *b);
+
+void	pushpm(t_list **lstplus, t_list **lstmoins);
+
+void	rotate(t_list **lst);
+void	rrotate(t_list **a, t_list **b);
+
+void	reverse_rotate(t_list **lst);
+void	rreverse_rrotate(t_list **a, t_list **b);
 
 #endif
