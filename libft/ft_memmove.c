@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 11:05:54 by kscordel          #+#    #+#             */
-/*   Updated: 2023/01/20 13:39:31 by kscordel         ###   ########.fr       */
+/*   Created: 2022/11/09 15:20:56 by kscordel          #+#    #+#             */
+/*   Updated: 2022/11/15 14:03:54 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	pushpm(t_list **lstplus, t_list **lstmoins, char x)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	t_list	*tmp;
-	
-	if (x == 'a')
-		ft_putstr_fd("pa\n", 1);
+	char		*bufd;
+	const char	*bufs;
+
+	bufd = dest;
+	bufs = src;
+	if (bufd <= bufs)
+		return (ft_memcpy(dest, src, n));
 	else
-		ft_putstr_fd("pb\n", 1);
-	if ((*lstmoins) != NULL)
 	{
-		tmp = (*lstmoins)->next;
-		if ((*lstplus) != NULL)
-			(*lstmoins)->next = (*lstplus);
-		else
-			(*lstmoins)->next = NULL;
-		(*lstplus) = (*lstmoins);
-		(*lstmoins) = tmp;
+		while (n--)
+			bufd[n] = bufs[n];
 	}
+	return (dest);
 }
-
-
-

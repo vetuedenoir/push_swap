@@ -6,7 +6,7 @@
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 17:20:46 by kscordel          #+#    #+#             */
-/*   Updated: 2023/01/20 13:47:44 by kscordel         ###   ########.fr       */
+/*   Updated: 2023/01/23 12:42:35 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_print_lst(t_list *lst)
 {
 	while (lst)
 	{
-		printf("%d\n", *(int *)(lst->content));
+		ft_printf("%d\n", *(int *)(lst->content));
 		lst = lst->next;
 	}
 }
@@ -78,9 +78,9 @@ static t_list	*printbig(t_list *big, int t)
 	while (t && big)
 	{
 		if (*(int *)(big->content) > 9999999 || *(int *)(big->content) < -999999)
-			printf("%d\t| \n", *(int *)(big->content));
+			ft_printf("%d\t| \n", *(int *)(big->content));
 		else
-			printf("%d\t\t| \n", *(int *)(big->content));
+			ft_printf("%d\t\t| \n", *(int *)(big->content));
 		big = big->next;
 		t--;
 	}
@@ -107,5 +107,6 @@ void	print_pile_ab(t_list *a, t_list *b)
 		a = a->next;
 		b = b->next;
 	}
-	printf("\nPile a\t\t| Pile b\n");
+	ft_printf("\nPile a\t\t| Pile b\n");
+	ft_printf("-----------------------------------------\n\n");
 }

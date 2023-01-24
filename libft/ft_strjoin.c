@@ -1,36 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 11:05:54 by kscordel          #+#    #+#             */
-/*   Updated: 2023/01/20 13:39:31 by kscordel         ###   ########.fr       */
+/*   Created: 2022/11/11 10:41:19 by kscordel          #+#    #+#             */
+/*   Updated: 2022/11/22 18:46:01 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	pushpm(t_list **lstplus, t_list **lstmoins, char x)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	t_list	*tmp;
-	
-	if (x == 'a')
-		ft_putstr_fd("pa\n", 1);
-	else
-		ft_putstr_fd("pb\n", 1);
-	if ((*lstmoins) != NULL)
+	int		t;
+	int		i;
+	int		p;
+	char	*str;
+
+	if (!s1 || !s2)
+		return (NULL);
+	i = 0;
+	p = 0;
+	t = ft_strlen(s1) + ft_strlen(s2);
+	str = malloc(sizeof(char) * (t + 1));
+	if (str == NULL)
+		return (NULL);
+	while (s1[i])
 	{
-		tmp = (*lstmoins)->next;
-		if ((*lstplus) != NULL)
-			(*lstmoins)->next = (*lstplus);
-		else
-			(*lstmoins)->next = NULL;
-		(*lstplus) = (*lstmoins);
-		(*lstmoins) = tmp;
+		str[i] = s1[i];
+		i++;
 	}
+	while (s2[p])
+	{
+		str[i + p] = s2[p];
+		p++;
+	}
+	str[i + p] = '\0';
+	return (str);
 }
-
-
-

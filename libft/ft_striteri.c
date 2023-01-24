@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 11:05:54 by kscordel          #+#    #+#             */
-/*   Updated: 2023/01/20 13:39:31 by kscordel         ###   ########.fr       */
+/*   Created: 2022/11/15 16:52:28 by kscordel          #+#    #+#             */
+/*   Updated: 2022/11/22 19:26:55 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "stdlib.h"
 
-void	pushpm(t_list **lstplus, t_list **lstmoins, char x)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	t_list	*tmp;
-	
-	if (x == 'a')
-		ft_putstr_fd("pa\n", 1);
-	else
-		ft_putstr_fd("pb\n", 1);
-	if ((*lstmoins) != NULL)
+	int	i;
+
+	i = 0;
+	if (!f || !s)
+		return ;
+	while (s[i])
 	{
-		tmp = (*lstmoins)->next;
-		if ((*lstplus) != NULL)
-			(*lstmoins)->next = (*lstplus);
-		else
-			(*lstmoins)->next = NULL;
-		(*lstplus) = (*lstmoins);
-		(*lstmoins) = tmp;
+		f(i, &s[i]);
+		i++;
 	}
 }
-
-
-

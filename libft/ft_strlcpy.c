@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 11:05:54 by kscordel          #+#    #+#             */
-/*   Updated: 2023/01/20 13:39:31 by kscordel         ###   ########.fr       */
+/*   Created: 2022/11/08 15:54:21 by kscordel          #+#    #+#             */
+/*   Updated: 2022/11/15 19:25:59 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	pushpm(t_list **lstplus, t_list **lstmoins, char x)
+size_t	ft_strlcpy(char *dest, const char *src, size_t n)
 {
-	t_list	*tmp;
-	
-	if (x == 'a')
-		ft_putstr_fd("pa\n", 1);
-	else
-		ft_putstr_fd("pb\n", 1);
-	if ((*lstmoins) != NULL)
+	size_t	i;
+
+	i = 0;
+	if (n > 0)
 	{
-		tmp = (*lstmoins)->next;
-		if ((*lstplus) != NULL)
-			(*lstmoins)->next = (*lstplus);
-		else
-			(*lstmoins)->next = NULL;
-		(*lstplus) = (*lstmoins);
-		(*lstmoins) = tmp;
+		while (src[i] && i < (n - 1))
+		{
+			dest[i] = src[i];
+			i++;
+		}
+		dest[i] = '\0';
 	}
+	while (src[i])
+		i++;
+	return (i);
 }
-
-
-

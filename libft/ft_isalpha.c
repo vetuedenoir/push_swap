@@ -1,36 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 11:05:54 by kscordel          #+#    #+#             */
-/*   Updated: 2023/01/20 13:39:31 by kscordel         ###   ########.fr       */
+/*   Created: 2022/11/07 14:54:42 by kscordel          #+#    #+#             */
+/*   Updated: 2022/12/02 11:18:11 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	pushpm(t_list **lstplus, t_list **lstmoins, char x)
+int	ft_isalpha(int c)
 {
-	t_list	*tmp;
-	
-	if (x == 'a')
-		ft_putstr_fd("pa\n", 1);
-	else
-		ft_putstr_fd("pb\n", 1);
-	if ((*lstmoins) != NULL)
-	{
-		tmp = (*lstmoins)->next;
-		if ((*lstplus) != NULL)
-			(*lstmoins)->next = (*lstplus);
-		else
-			(*lstmoins)->next = NULL;
-		(*lstplus) = (*lstmoins);
-		(*lstmoins) = tmp;
-	}
+	if ((c >= 97 && c <= 122) || (c >= 65 && c <= 90))
+		return (1);
+	return (0);
 }
-
-
-

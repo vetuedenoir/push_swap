@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/18 11:05:54 by kscordel          #+#    #+#             */
-/*   Updated: 2023/01/20 13:39:31 by kscordel         ###   ########.fr       */
+/*   Created: 2022/11/08 17:59:41 by kscordel          #+#    #+#             */
+/*   Updated: 2022/12/01 15:53:57 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	pushpm(t_list **lstplus, t_list **lstmoins, char x)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	t_list	*tmp;
-	
-	if (x == 'a')
-		ft_putstr_fd("pa\n", 1);
-	else
-		ft_putstr_fd("pb\n", 1);
-	if ((*lstmoins) != NULL)
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	if (little[i] == '\0')
+		return ((char *)big);
+	while (big[i] && i < len)
 	{
-		tmp = (*lstmoins)->next;
-		if ((*lstplus) != NULL)
-			(*lstmoins)->next = (*lstplus);
-		else
-			(*lstmoins)->next = NULL;
-		(*lstplus) = (*lstmoins);
-		(*lstmoins) = tmp;
+		j = 0;
+		while (big[i + j] == little[j] && big[i + j]
+			&& little[j] && i + j < len)
+		{
+			j++;
+			if (little[j] == '\0')
+				return ((char *)&big[i]);
+		}
+		i++;
 	}
+	return (NULL);
 }
-
-
-

@@ -12,11 +12,15 @@
 
 #include "push_swap.h"
 
- void	swap(t_list *lst)
+ void	swap(t_list *lst, char x)
  {
  	t_list	*next;
-	int	*data;	
+	int	*data;
 
+	if (x == 'a')
+		ft_putstr_fd("sa\n", 1);
+	else
+		ft_putstr_fd("sb\n", 1);
 	if (lst->next)
 	{
 		next = lst->next;
@@ -31,6 +35,7 @@
  	t_list	*next;
 	int	*data;	
 
+	ft_putstr_fd("ss\n", 1);
 	if (a->next)
 	{
 		next = a->next;

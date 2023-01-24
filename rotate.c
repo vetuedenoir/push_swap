@@ -6,16 +6,20 @@
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 11:07:05 by kscordel          #+#    #+#             */
-/*   Updated: 2023/01/20 18:02:38 by kscordel         ###   ########.fr       */
+/*   Updated: 2023/01/23 15:19:18 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rotate(t_list **lst)
+void	rotate(t_list **lst, char x)
 {
 	t_list	*tmp;
-
+	
+	if (x == 'a')
+		ft_putstr_fd("ra", 1);
+	else
+		ft_putstr_fd("rb", 1);
 	if ((*lst) != NULL)
 	{
 		tmp = (*lst)->next;

@@ -19,10 +19,14 @@ static void	minuslist(t_list *lst, t_list *last)
 	lst->next = NULL;
 }
 
-void	reverse_rotate(t_list **lst)
+void	reverse_rotate(t_list **lst, char x)
 {
 	t_list	*tmp;
 
+	if (x == 'a')
+		ft_putstr_fd("rra\n", 1);
+	else
+		ft_putstr_fd("rrb\n", 1);
 	if ((*lst) != NULL)
 	{
 		if ((*lst)->next != NULL)
@@ -39,6 +43,7 @@ void	rreverse_rrotate(t_list **a, t_list **b)
 	t_list	*tmpa;
 	t_list	*tmpb;
 
+	ft_putstr_fd("rrr\n", 1);
 	if ((*a) != NULL)
 	{
 		if ((*a)->next != NULL)
