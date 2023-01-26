@@ -6,7 +6,7 @@
 #    By: kscordel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 15:10:59 by kscordel          #+#    #+#              #
-#    Updated: 2023/01/24 19:49:37 by kscordel         ###   ########.fr        #
+#    Updated: 2023/01/26 14:50:07 by kscordel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,10 +49,6 @@ SRC =	ft_isalpha.c\
 	ft_putstr_fd.c\
 	ft_putendl_fd.c\
 	ft_putnbr_fd.c\
-	get_next_line_bonus.c\
-	get_next_line_utils_bonus.c\
-	ft_printf.c\
-	puts.c\
 	ft_lstadd_back.c\
 	ft_lstclear.c\
 	ft_lstiter.c\
@@ -61,23 +57,21 @@ SRC =	ft_isalpha.c\
 	ft_lstadd_front.c\
 	ft_lstdelone.c\
 	ft_lstlast.c\
-	ft_lstnew.c
+	ft_lstnew.c\
+	get_next_line_bonus.c\
+	get_next_line_utils_bonus.c\
+	printf/ft_printf.c\
+	printf/puts.c
 
 
 OBJ = $(SRC:.c=.o)
 
-${OBJ}:		${SRC}
-			${CC} ${CFLAGS} -c ${SRC}
+all:		${NAME}
 
-$(NAME):	${OBJ}
-			ar rc ${NAME} ${OBJ}
+${NAME}:	${OBJ}
+			ar rcs ${NAME} ${OBJ}
 #			mv ${OBJ} ./obj/${OBJ}
 
-so:
-	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRC) $(BSRC)
-	gcc -nostartfiles -shared -o libft.so $(OBJ) $(BOBJ)
-
-all:		${NAME}
 
 clean:
 #			${RM} ./obj/${OBJ}

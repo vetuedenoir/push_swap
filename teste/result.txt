@@ -1,0 +1,7 @@
+Pour un tableau de 10000 int.
+
+Classement d un tableau avec le tri a bulle : ./a.out  263.42s user 0.06s system 99% cpu 4:23.56 total
+
+Classement d un tableau aec le trifusion : ./a.out  0.02s user 0.06s system 97% cpu 0.081 total
+
+Classement d un tableau avec le triRapide : ./a.out  0.02s user 0.06s system 96% cpu 0.083 total

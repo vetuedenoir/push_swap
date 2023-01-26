@@ -17,9 +17,9 @@ void	rotate(t_list **lst, char x)
 	t_list	*tmp;
 	
 	if (x == 'a')
-		ft_putstr_fd("ra", 1);
+		ft_putstr_fd("ra\n", 1);
 	else
-		ft_putstr_fd("rb", 1);
+		ft_putstr_fd("rb\n", 1);
 	if ((*lst) != NULL)
 	{
 		tmp = (*lst)->next;
@@ -34,6 +34,7 @@ void	rrotate(t_list **a, t_list **b)
 	t_list	*tmpa;
 	t_list	*tmpb;
 
+	ft_putstr_fd("rr\n", 1);
 	if ((*a) != NULL)
 	{
 		tmpa = (*a)->next;

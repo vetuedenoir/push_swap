@@ -17,9 +17,9 @@ void	pushpm(t_list **lstplus, t_list **lstmoins, char x)
 	t_list	*tmp;
 	
 	if (x == 'a')
-		ft_putstr_fd("pa\n", 1);
-	else
-		ft_putstr_fd("pb\n", 1);
+			ft_putstr_fd("pa\n", 1);
+		else
+			ft_putstr_fd("pb\n", 1);
 	if ((*lstmoins) != NULL)
 	{
 		tmp = (*lstmoins)->next;

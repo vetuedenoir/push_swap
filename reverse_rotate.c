@@ -34,6 +34,7 @@ void	reverse_rotate(t_list **lst, char x)
 			tmp = ft_lstlast((*lst));
 			minuslist((*lst), tmp);
 			ft_lstadd_front(lst, tmp);
+			
 		}
 	}
 }

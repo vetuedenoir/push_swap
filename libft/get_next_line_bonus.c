@@ -6,15 +6,15 @@
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:33:55 by kscordel          #+#    #+#             */
-/*   Updated: 2023/01/14 17:30:39 by kscordel         ###   ########.fr       */
+/*   Updated: 2023/01/16 16:30:50 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "libft.h"
 
-int	ft_testreturn(const char *s, char f)
+size_t	ft_testreturn(const char *s, char f)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (!s)
@@ -30,14 +30,14 @@ int	ft_testreturn(const char *s, char f)
 	return (0);
 }
 
-char	*ft_read_file(char *stash, int mark, int fd)
+char	*ft_read_file(char *stash, int fd)
 {
 	char	*buf;
 	int		index;
 	int		readed;
 	int		total;
 
-	total = ft_length(&stash[mark]) + mark;
+	total = ft_length(stash);
 	readed = 0;
 	index = 0;
 	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
@@ -59,27 +59,23 @@ char	*ft_read_file(char *stash, int mark, int fd)
 
 char	*get_next_line(int fd)
 {
-	static t_backup		backup[1024];
-	char				*line;
-	int					index;
-	int					t;
+	static char	*stash[1024];
+	char		*line;
+	size_t		index;
+	size_t		t;
 
-	if (fd < 0 || fd > 1024)
+	if (fd < 0 || fd >= 1024)
 		return (NULL);
 	index = 0;
-	t = backup[fd].mark;
-	if (backup[fd].stash)
-		index = ft_testreturn(&backup[fd].stash[t], 0);
+	t = 0;
+	if (stash[fd])
+		index = ft_testreturn(stash[fd], 0);
 	if (!index)
-		backup[fd].stash = ft_read_file(backup[fd].stash, t, fd);
-	if (backup[fd].stash)
-		line = ft_copy(backup[fd].stash, &t);
+		stash[fd] = ft_read_file(stash[fd], fd);
+	if (stash[fd])
+		line = ft_copy(stash[fd], &t);
 	else
 		return (NULL);
-	backup[fd].stash = ft_clean(backup[fd].stash, t);
-	if (backup[fd].stash)
-		backup[fd].mark = t;
-	else
-		backup[fd].mark = 0;
+	stash[fd] = ft_clean(stash[fd], t);
 	return (line);
 }

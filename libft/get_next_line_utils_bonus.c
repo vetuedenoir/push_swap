@@ -6,14 +6,26 @@
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:34:31 by kscordel          #+#    #+#             */
-/*   Updated: 2023/01/14 15:08:05 by kscordel         ###   ########.fr       */
+/*   Updated: 2023/01/16 16:29:12 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "libft.h"
 
-char	*ft_add_buf(char *stash, char *buf, int total)
+char	*movechar(char *str, size_t index)
 {
+	size_t	x;
+
+	x = 0;
+	while (str[index])
+		str[x++] = str[index++];
+	str[x] = '\0';
+	return (str);
+}
+
+char	*ft_add_buf(char *stash, char *buf, size_t total)
+{
+	size_t		t;
 	int			i;
 	int			p;
 	char		*str;
@@ -27,7 +39,8 @@ char	*ft_add_buf(char *stash, char *buf, int total)
 	}
 	i = -1;
 	p = -1;
-	str = malloc(sizeof(char) * (total + 1));
+	t = total;
+	str = malloc(sizeof(char) * (t + 1));
 	if (str == NULL)
 		return (free(stash), NULL);
 	while (stash[++i])
@@ -38,37 +51,35 @@ char	*ft_add_buf(char *stash, char *buf, int total)
 	return (free(stash), str);
 }
 
-char	*ft_copy(char *stash, int *t)
+char	*ft_copy(char *stash, size_t *t)
 {
 	char	*line;
-	int		l;
-	int		x;
+	size_t	l;
 
-	l = ft_testreturn(&stash[*t], 1);
-	x = *t;
-	*t = *t + l;
+	*t = ft_testreturn(stash, 1);
+	l = *t;
 	line = malloc(sizeof(char) * (l + 1));
 	if (!line)
 		return (NULL);
 	line[l] = '\0';
 	while (l-- > 0)
-		line[l] = stash[x + l];
+		line[l] = stash[l];
 	return (line);
 }
 
-char	*ft_clean(char *stash, int t)
+char	*ft_clean(char *stash, size_t t)
 {
 	if (stash[t] == '\0')
 	{
 		free(stash);
 		return (NULL);
 	}
-	return (stash);
+	return (stash = movechar(stash, t));
 }
 
-int	ft_length(const char *str)
+size_t	ft_length(const char *str)
 {
-	int	i;
+	size_t	i;
 
 	if (!str)
 		return (0);

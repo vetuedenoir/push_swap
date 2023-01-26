@@ -6,7 +6,7 @@
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 20:03:16 by kscordel          #+#    #+#             */
-/*   Updated: 2023/01/24 19:42:28 by kscordel         ###   ########.fr       */
+/*   Updated: 2023/01/26 16:48:32 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,18 @@ int	ft_mediane(t_list *lst)
 	else
 		mediane = tab[index.k / 2 + 1];
 	return (mediane);
+}
+
+int	ft_bigest(t_list *lst)
+{
+	int	bigest;
+	
+	bigest = *(int *)lst->content;
+	while (lst)
+	{
+		if (bigest < *(int *)lst->content)
+			bigest = *(int *)lst->content;
+		lst = lst->next;
+	}
+	return (bigest);
 }

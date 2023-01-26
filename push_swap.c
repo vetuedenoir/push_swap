@@ -6,7 +6,7 @@
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:25:00 by kscordel          #+#    #+#             */
-/*   Updated: 2023/01/24 19:30:05 by kscordel         ###   ########.fr       */
+/*   Updated: 2023/01/26 18:10:59 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,51 @@ int	ft_veriftri(t_list *lst)
 void	ft_pretri(t_list **a, t_list **b)
 {
 	int	mediane;
+	int	bigest;
+	int	i;
+	t_list	*sauvegard;
+	t_list	*tmp;
 
+	i = 0;
 	mediane = ft_mediane(*a);
-	mediane = ft_mediane(*b);
+	bigest = ft_bigest(*a);
+	while (*a)
+	{
+		tmp = (*a)->next;
+		if (*(int *)((*a)->content) < bigest)
+		{
+			pushpm(b, a, 'b');
+			if (*(int *)((*b)->content) < mediane && i)
+				rotate(b, 'b');
+		}
+		else
+			sauvegard = *a;
+		*a = tmp;
+		i++;
+	print_pile_ab(*a, *b);
+	}
+	*a = sauvegard;
+}
 
+
+void	three_operation(t_list **a, int one, int two, int three)
+{
+	if (one > two && two > three)
+	{
+		swap(*a, 'a');
+		reverse_rotate(a, 'a');
+	}
+	else if (one < two && one < three && three < two)
+	{
+		swap(*a, 'a');
+		rotate(a, 'a');
+	}
+	else if (one > two && one > three)
+		rotate(a, 'a');
+	else if (three < one && three < two)
+		reverse_rotate(a, 'a');
+	else if (one > two && one < three)
+		swap(*a, 'a');
 }
 
 void	ft_algothree(t_list **a)
@@ -51,17 +92,7 @@ void	ft_algothree(t_list **a)
 	*a = (*a)->next;
 	three = *(int *)((*a)->content);
 	*a = first;
-	if (one > two && two > three)
-	{
-		swap(*a, 'a');
-		reverse_rotate(a, 'a');
-	}
-	else if (one > two && one > three)
-		rotate(a, 'a');
-	else if (three < one && three < two)
-		reverse_rotate(a, 'a');
-	else if (one > two && one < three)
-		swap(*a, 'a');
+	three_operation(a, one, two, three);
 }
 
 void	ft_push_swap(t_list **a, t_list **b, int size)
@@ -70,11 +101,8 @@ void	ft_push_swap(t_list **a, t_list **b, int size)
 		swap(*a, 'a');
 	if (size == 3)
 		ft_algothree(a);
-	
-	if (size > 100)
+	if (size >= 4)
 		ft_pretri(a, b);
-
-
 }
 
 int	main(int argc, char *argv[])
@@ -117,7 +145,7 @@ int	main(int argc, char *argv[])
 	print_pile_ab(a, b);
 	rreverse_rrotate(&a, &b);
 	ft_putstr_fd("\t       rrr\n", 1);
-	print_pile_ab(a, b);
 	*/
+	print_pile_ab(a, b);
 	exit (0);
 }
