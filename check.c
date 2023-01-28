@@ -6,7 +6,7 @@
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 11:35:55 by kscordel          #+#    #+#             */
-/*   Updated: 2023/01/18 12:18:57 by kscordel         ###   ########.fr       */
+/*   Updated: 2023/01/28 19:24:11 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	*ft_convert(const char *str)
 	long	l;
 	int		*nbr;
 
+	if (str == NULL)
+		return (NULL);
 	l = ft_atol(str);
 	if (l < INT_MIN || l > INT_MAX)
 		return (NULL);
@@ -64,10 +66,10 @@ t_list	*ft_transfo(char **argument)
 	{
 		nbr = ft_convert(argument[x]);
 		if (!nbr)
-			return (free_lc(first), NULL);
+			return (free_lc(&first), NULL);
 		tmp->next = ft_lstnew(nbr);
 		if (!tmp->next)
-			return (free_lc(first), NULL);
+			return (free_lc(&first), NULL);
 		tmp = tmp->next;
 	}
 	return (first);
@@ -110,6 +112,7 @@ t_list	*ft_all_check(char **argument, int argc)
 		if (!ft_check_nbr(taba))
 			return (free_tt(taba));
 		a = ft_transfo(taba);
+		free_tt(taba);
 	}
 	else
 	{
@@ -120,6 +123,6 @@ t_list	*ft_all_check(char **argument, int argc)
 	if (!a)
 		return (NULL);
 	if (!ft_check_doublons(a))
-		return (free_lc(a), NULL);
+		return (free_lc(&a), NULL);
 	return (a);
 }

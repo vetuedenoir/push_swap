@@ -6,7 +6,7 @@
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 17:20:46 by kscordel          #+#    #+#             */
-/*   Updated: 2023/01/23 12:42:35 by kscordel         ###   ########.fr       */
+/*   Updated: 2023/01/28 19:03:59 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,19 @@ void	*free_tt(char **ts)
 	return (NULL);
 }
 
-void	free_lc(t_list *lst)
+void	free_lc(t_list **lst)
 {
 	t_list	*tmp;
 
-	tmp = NULL;
-	while (lst != NULL)
+	if (!lst)
+		return ;
+	while (*lst != NULL)
 	{
-		lst->next = tmp;
-		if (lst->content)
-			free(lst->content);
-		free(lst);
-		lst = tmp;
+		tmp = (*lst)->next;
+		if ((*lst)->content != NULL)
+			free((*lst)->content);
+		free(*lst);
+		*lst = tmp;
 	}
 	//return (NULL);
 }
@@ -78,9 +79,9 @@ static t_list	*printbig(t_list *big, int t)
 	while (t && big)
 	{
 		if (*(int *)(big->content) > 9999999 || *(int *)(big->content) < -999999)
-			ft_printf("%d\t| \n", *(int *)(big->content));
+			ft_printf("\n %p\n%d\t| \n", big, *(int *)(big->content));
 		else
-			ft_printf("%d\t\t| \n", *(int *)(big->content));
+			ft_printf("\n %p\n%d\t\t| \n", big, *(int *)(big->content));
 		big = big->next;
 		t--;
 	}
@@ -101,9 +102,9 @@ void	print_pile_ab(t_list *a, t_list *b)
 	while (a && b)
 	{
 		if (*(int *)(a->content) > 9999999 || *(int *)(a->content) < -999999)
-			printf("%d\t| %d\n", *(int *)(a->content), *(int *)(b->content));
+			printf("\n %p\t%p\n%d\t| %d\n", a, b, *(int *)(a->content), *(int *)(b->content));
 		else
-			printf("%d\t\t| %d\n", *(int *)(a->content), *(int *)(b->content));
+			printf("\n %p\t%p\n%d\t\t| %d\n", a, b, *(int *)(a->content), *(int *)(b->content));
 		a = a->next;
 		b = b->next;
 	}

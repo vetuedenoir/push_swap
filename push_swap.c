@@ -6,7 +6,7 @@
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:25:00 by kscordel          #+#    #+#             */
-/*   Updated: 2023/01/26 18:10:59 by kscordel         ###   ########.fr       */
+/*   Updated: 2023/01/28 18:31:47 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,29 @@ void	ft_pretri(t_list **a, t_list **b)
 	int	bigest;
 	int	i;
 	t_list	*sauvegard;
-	t_list	*tmp;
+	//t_list	*tmp;
 
+
+	print_pile_ab(*a, *b);
 	i = 0;
 	mediane = ft_mediane(*a);
 	bigest = ft_bigest(*a);
-	while (*a)
+	while ((*a)->next)
 	{
-		tmp = (*a)->next;
 		if (*(int *)((*a)->content) < bigest)
 		{
 			pushpm(b, a, 'b');
+			print_pile_ab(*a, *b);
 			if (*(int *)((*b)->content) < mediane && i)
+			{
 				rotate(b, 'b');
+				print_pile_ab(*a, *b);
+			}
 		}
 		else
 			sauvegard = *a;
-		*a = tmp;
+		//*a = (*a)->next;
 		i++;
-	print_pile_ab(*a, *b);
 	}
 	*a = sauvegard;
 }
@@ -119,9 +123,9 @@ int	main(int argc, char *argv[])
 	if (!a)
 		ft_putstr_fd("Error", 2);
 	if (ft_veriftri(a))
-		exit (0);
+		return (free_lc(a), 1);
 	size = ft_lstsize(a);
-	ft_push_swap(&a, &b, size);
+	//ft_push_swap(&a, &b, size);
 	/*
 	ft_putstr_fd("\t        Init\n", 1);
 	print_pile_ab(a, b);
@@ -147,5 +151,6 @@ int	main(int argc, char *argv[])
 	ft_putstr_fd("\t       rrr\n", 1);
 	*/
 	print_pile_ab(a, b);
+	free_lc(a);
 	exit (0);
 }

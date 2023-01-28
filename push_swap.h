@@ -6,7 +6,7 @@
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 19:02:32 by kscordel          #+#    #+#             */
-/*   Updated: 2023/01/26 16:49:15 by kscordel         ###   ########.fr       */
+/*   Updated: 2023/01/28 18:50:49 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		*ft_convert(const char *str);
 int		ft_check_nbr(char **argument);
 
 void	*free_tt(char **ts);
-void	free_lc(t_list *lst);
+void	free_lc(t_list **lst);
 long	ft_atol(const char *str);
 void	ft_print_lst(t_list *lst);
 void	print_pile_ab(t_list *a, t_list *b);
