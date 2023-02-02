@@ -6,7 +6,7 @@
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 11:05:54 by kscordel          #+#    #+#             */
-/*   Updated: 2023/01/27 15:18:45 by kscordel         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:20:53 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	pushpm(t_list **lstplus, t_list **lstmoins, char x)
 {
-	t_list	*tmp;
+	t_list	*plus;
+	t_list	*moins;
 	t_list	*sauvegard;
 	
 	if (x == 'a')
@@ -23,7 +24,7 @@ void	pushpm(t_list **lstplus, t_list **lstmoins, char x)
 			ft_putstr_fd("pb\n", 1);
 	if ((*lstmoins) != NULL)
 	{
-		tmp = (*lstmoins)->next;
+		moins = (*lstmoins)->next;
 		/*if ((*lstplus) != NULL)
 			(*lstmoins)->next = (*lstplus); // peut etre pas bon
 		else
@@ -32,9 +33,10 @@ void	pushpm(t_list **lstplus, t_list **lstmoins, char x)
 			sauvegard = *lstplus;
 		else
 			sauvegard = NULL;
-		(*lstplus) = (*lstmoins);
-		(*lstplus)->next = sauvegard;
-		(*lstmoins) = tmp;
+		plus = (*lstmoins);
+		plus->next = sauvegard;
+		(*lstmoins) = moins;
+		*lstplus = plus;
 	}
 }
 
