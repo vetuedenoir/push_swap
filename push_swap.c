@@ -6,7 +6,7 @@
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:25:00 by kscordel          #+#    #+#             */
-/*   Updated: 2023/02/02 15:32:59 by kscordel         ###   ########.fr       */
+/*   Updated: 2023/02/02 16:42:42 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ int	ft_veriftri(t_list *lst)
 	}
 	return (1);
 }
-
+/*
 void	ft_pretri(t_list **a, t_list **b)
 {
 	int	mediane;
 	int	bigest;
-	//t_list	*tmp;
+	int	i;
 
-
+	i = 0;
 	print_pile_ab(*a, *b);
 	mediane = ft_mediane(*a);
 	bigest = ft_bigest(*a);
@@ -44,18 +44,68 @@ void	ft_pretri(t_list **a, t_list **b)
 		{
 			pushpm(b, a, 'b');
 			print_pile_ab(*a, *b);
-			if (*(int *)((*b)->content) < mediane)
+			if (*(int *)((*b)->content) < mediane && i)
 			{
 				rotate(b, 'b');
 				print_pile_ab(*a, *b);
 			}
 		}
-		//*a = (*a)->next;
+		else
+			break ;
+		i++;
 	}
+}
+*/
+
+
+void    ft_pretri(t_list **list_a, t_list **list_b)
+{
+    t_list    *node;
+    t_list    *max_node;
+    int        max_value;
+    int		mediane;
+    
+
+	mediane = ft_mediane(*list_a);
+    node = *list_a;
+    max_node = node;
+    max_value = *(int *)node->content;
+    while (node != NULL)
+    // On parcourt la liste jusqu'à trouver l'élément ayant la valeur maximale
+    {
+        if (*(int *)node->content > max_value)
+        {
+            max_node = node;
+            max_value = *(int *)node->content;
+        }
+        node = node->next;
+    }
+    node = *list_a; //reset
+
+    while (*list_a != NULL)
+       {
+        if (*list_a != max_node)
+        {
+            pushpm(list_b, list_a, 'b');
+	    print_pile_ab(*list_a, *list_b);
+            if (*(int *)(*list_b)->content < mediane)
+            {
+	    	rotate(list_b, 'b');
+		print_pile_ab(*list_a, *list_b);
+	    }
+        }
+        else
+            break ;
+    }
+    *list_a = max_node;
+    // On remet l'élément ayant la valeur maximale en tête de list_a
+    rotate(list_a, 'a');
+    print_pile_ab(*list_a, *list_b);
 }
 
 
-void	three_operation(t_list **a, int one, int two, int three)
+
+static void	three_operation(t_list **a, int one, int two, int three)
 {
 	if (one > two && two > three)
 	{
