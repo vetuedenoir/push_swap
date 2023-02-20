@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+/*
 static void	minuslist(t_list *lst, t_list *last)
 {
 	while (lst->next != last)
@@ -38,29 +38,31 @@ void	reverse_rotate(t_list **lst, char x)
 		}
 	}
 }
+*/
+
+void    reverse_rotate(t_list **lst, char x)
+{
+	t_list *node;
+
+	if (*lst == NULL || (*lst)->next == NULL)
+		return ;
+	node = *lst;
+	while (node->next->next != NULL)
+	{
+		node = node->next;
+	}
+	node->next->next = *lst;
+	*lst = node->next;
+	node->next = NULL;
+	if (x == 'a')
+		write(1, "rra\n", 4);
+	if (x == 'b')
+		write(1, "rrb\n", 4);
+}
 
 void	rreverse_rrotate(t_list **a, t_list **b)
 {
-	t_list	*tmpa;
-	t_list	*tmpb;
-
-	ft_putstr_fd("rrr\n", 1);
-	if ((*a) != NULL)
-	{
-		if ((*a)->next != NULL)
-		{
-			tmpa = ft_lstlast((*a));
-			minuslist((*a), tmpa);
-			ft_lstadd_front(a, tmpa);
-		}
-	}
-	if ((*b) != NULL)
-	{
-		if ((*b)->next != NULL)
-		{
-			tmpb = ft_lstlast((*b));
-			minuslist((*b), tmpb);
-			ft_lstadd_front(b, tmpb);
-		}
-	}
+	reverse_rotate(a, 'x');
+	reverse_rotate(b, 'x');
+	write(1, "rrr\n", 4);
 }

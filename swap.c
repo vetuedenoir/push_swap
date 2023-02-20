@@ -12,42 +12,27 @@
 
 #include "push_swap.h"
 
- void	swap(t_list *lst, char x)
- {
- 	t_list	*next;
-	int	*data;
+void    swap(t_list **lst, char x)
+{
+	t_list    *premier;
+	t_list    *second;
 
+	if (*lst == NULL || (*lst)->next == NULL)
+		return ;
+	premier = (*lst)->next;
+	second = premier->next;
+	premier->next = *lst;
+	(*lst)->next = second;
+	*lst = premier;
 	if (x == 'a')
-		ft_putstr_fd("sa\n", 1);
-	else
-		ft_putstr_fd("sb\n", 1);
-	if (lst->next)
-	{
-		next = lst->next;
-		data = lst->content;
-		lst->content = next->content;
-		next->content = data;
-	}
- }
- 
- void	sswap(t_list *a, t_list *b)
- {
- 	t_list	*next;
-	int	*data;	
+		write(1, "sa\n", 3);
+	if (x == 'b')
+		write(1, "sb\n", 3);
+}
 
-	ft_putstr_fd("ss\n", 1);
-	if (a->next)
-	{
-		next = a->next;
-		data = a->content;
-		a->content = next->content;
-		next->content = data;
-	}
-	if (b->next)
-	{
-		next = b->next;
-		data = b->content;
-		b->content = next->content;
-		next->content = data;
-	}
- }
+void	sswap(t_list **a, t_list **b)
+{
+	swap(a, 'x');
+	swap(b, 'x');
+	write(1, "ss\n", 3);
+}

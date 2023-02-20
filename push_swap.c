@@ -27,18 +27,21 @@ int	ft_veriftri(t_list *lst)
 	}
 	return (1);
 }
-/*
+
 void	ft_pretri(t_list **a, t_list **b)
 {
 	int	mediane;
 	int	bigest;
 	int	i;
+	int	x;
 
 	i = 0;
+	x = 0;
 	print_pile_ab(*a, *b);
 	mediane = ft_mediane(*a);
 	bigest = ft_bigest(*a);
-	while (*a != NULL)
+	//while (*a != NULL)
+	while (*(int *)((*a)->content) != bigest)
 	{
 		if (*(int *)((*a)->content) != bigest)
 		{
@@ -49,15 +52,23 @@ void	ft_pretri(t_list **a, t_list **b)
 				rotate(b, 'b');
 				print_pile_ab(*a, *b);
 			}
+					i++;
 		}
 		else
-			break ;
-		i++;
-	}
-}
-*/
+		{
+			if (!x)
+			{
+				rotate(a, 'a');
+				print_pile_ab(*a, *b);
+			}
+			else
+				break ;
+			x++;
+		}
+	}}
 
 
+/*
 void    ft_pretri(t_list **list_a, t_list **list_b)
 {
     t_list    *node;
@@ -102,19 +113,19 @@ void    ft_pretri(t_list **list_a, t_list **list_b)
     rotate(list_a, 'a');
     print_pile_ab(*list_a, *list_b);
 }
-
+*/
 
 
 static void	three_operation(t_list **a, int one, int two, int three)
 {
 	if (one > two && two > three)
 	{
-		swap(*a, 'a');
+		swap(a, 'a');
 		reverse_rotate(a, 'a');
 	}
 	else if (one < two && one < three && three < two)
 	{
-		swap(*a, 'a');
+		swap(a, 'a');
 		rotate(a, 'a');
 	}
 	else if (one > two && one > three)
@@ -122,7 +133,7 @@ static void	three_operation(t_list **a, int one, int two, int three)
 	else if (three < one && three < two)
 		reverse_rotate(a, 'a');
 	else if (one > two && one < three)
-		swap(*a, 'a');
+		swap(a, 'a');
 }
 
 void	ft_algothree(t_list **a)
@@ -145,7 +156,7 @@ void	ft_algothree(t_list **a)
 void	ft_push_swap(t_list **a, t_list **b, int size)
 {
 	if (size == 2)
-		swap(*a, 'a');
+		swap(a, 'a');
 	if (size == 3)
 		ft_algothree(a);
 	if (size >= 4)
@@ -169,30 +180,6 @@ int	main(int argc, char *argv[])
 		return (free_lc(&a), 1);
 	size = ft_lstsize(a);
 	ft_push_swap(&a, &b, size);
-	/*
-	ft_putstr_fd("\t        Init\n", 1);
-	print_pile_ab(a, b);
-	pushpm(&b, &a);
-	ft_putstr_fd("\t        pb\n", 1);
-	print_pile_ab(a, b);
-	pushpm(&b, &a);
-	ft_putstr_fd("\t        pb\n", 1);
-	print_pile_ab(a, b);
-	pushpm(&b, &a);
-	ft_putstr_fd("\t        pb\n", 1);
-	print_pile_ab(a, b);
-	pushpm(&b, &a);
-	ft_putstr_fd("\t        pb\n", 1);
-	print_pile_ab(a, b);
-	rrotate(&a, &b);
-	ft_putstr_fd("\t        rr\n", 1);
-	print_pile_ab(a, b);
-	sswap(a, b);
-	ft_putstr_fd("\t        ss\n", 1);
-	print_pile_ab(a, b);
-	rreverse_rrotate(&a, &b);
-	ft_putstr_fd("\t       rrr\n", 1);
-	*/
 	print_pile_ab(a, b);
 	free_lc(&a);
 	exit (0);

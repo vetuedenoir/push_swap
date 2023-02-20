@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+/*
 void	rotate(t_list **lst, char x)
 {
 	t_list	*tmp;
@@ -28,25 +28,31 @@ void	rotate(t_list **lst, char x)
 		(*lst) = tmp;
 	}
 }
+*/
+
+void    rotate(t_list **lst, char x)
+{
+	t_list    *node;
+
+	if (*lst == NULL || (*lst)->next == NULL)
+		return ;
+	node = *lst;
+	while (node->next != NULL)
+	{
+		node = node->next;
+	}
+	node->next = *lst;
+	*lst = (*lst)->next;
+	node->next->next = NULL;
+	if (x == 'a')
+		write(1, "ra\n", 3);
+	if (x == 'b')
+		write(1, "rb\n", 3);
+}
 
 void	rrotate(t_list **a, t_list **b)
 {
-	t_list	*tmpa;
-	t_list	*tmpb;
-
-	ft_putstr_fd("rr\n", 1);
-	if ((*a) != NULL)
-	{
-		tmpa = (*a)->next;
-		(*a)->next = NULL;
-		ft_lstadd_back(&tmpa, (*a));
-		(*a) = tmpa;
-	}
-	if ((*b) != NULL)
-	{
-		tmpb = (*b)->next;
-		(*b)->next = NULL;
-		ft_lstadd_back(&tmpb, (*b));
-		(*b) = tmpb;
-	}
+	rotate(a, 'x');
+	rotate(b, 'x');
+	write(1, "rr\n", 3);
 }

@@ -37,8 +37,8 @@ long	ft_atol(const char *str);
 void	ft_print_lst(t_list *lst);
 void	print_pile_ab(t_list *a, t_list *b);
 
-void	swap(t_list *list, char x);
-void	sswap(t_list *a, t_list *b);
+void	swap(t_list **list, char x);
+void	sswap(t_list **a, t_list **b);
 
 void	pushpm(t_list **lstplus, t_list **lstmoins, char x);
 

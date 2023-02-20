@@ -82,9 +82,9 @@ static t_list	*printbig(t_list *big, int t)
 	while (t && big)
 	{
 		if (*(int *)(big->content) > 9999999 || *(int *)(big->content) < -999999)
-			ft_printf("\n %p\n%d\t| \n", big, *(int *)(big->content));
+			ft_printf("\n%d\t| \n", *(int *)(big->content));
 		else
-			ft_printf("\n %p\n%d\t\t| \n", big, *(int *)(big->content));
+			ft_printf("\n%d\t\t| \n", *(int *)(big->content));
 		big = big->next;
 		t--;
 	}
@@ -105,9 +105,9 @@ void	print_pile_ab(t_list *a, t_list *b)
 	while (a && b)
 	{
 		if (*(int *)(a->content) > 9999999 || *(int *)(a->content) < -999999)
-			printf("\n %p\t%p\n%d\t| %d\n", a, b, *(int *)(a->content), *(int *)(b->content));
+			printf("\n%d\t| %d\n", *(int *)(a->content), *(int *)(b->content));
 		else
-			printf("\n %p\t%p\n%d\t\t| %d\n", a, b, *(int *)(a->content), *(int *)(b->content));
+			printf("\n%d\t\t| %d\n", *(int *)(a->content), *(int *)(b->content));
 		a = a->next;
 		b = b->next;
 	}

@@ -11,34 +11,37 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	pushpm(t_list **lstplus, t_list **lstmoins, char x)
+/*
+void    pushpm(t_list **lstplus, t_list **lstmoins, char x)
 {
-	t_list	*plus;
-	t_list	*moins;
-	t_list	*sauvegard;
-	
+	t_list    *node;
+
+	if (*lstmoins == NULL)
+		return ;
+	node = *lstmoins;
+	*lstmoins = node->next;
+	node->next = *lstplus;
+	*lstplus = node;
 	if (x == 'a')
-			ft_putstr_fd("pa\n", 1);
-		else
-			ft_putstr_fd("pb\n", 1);
-	if ((*lstmoins) != NULL)
-	{
-		moins = (*lstmoins)->next;
-		/*if ((*lstplus) != NULL)
-			(*lstmoins)->next = (*lstplus); // peut etre pas bon
-		else
-			(*lstmoins)->next = NULL;*/
-		if ((*lstplus) != NULL)
-			sauvegard = *lstplus;
-		else
-			sauvegard = NULL;
-		plus = (*lstmoins);
-		plus->next = sauvegard;
-		(*lstmoins) = moins;
-		*lstplus = plus;
-	}
+		write(1, "pa\n", 3);
+	if (x == 'b')
+		write(1, "pb\n", 3);
 }
+*/
 
+void    pushpm(t_list **lstplus, t_list **lstmoins, char x)
+{
+    t_list    *tmp;
 
-
+    if (*lstmoins)
+    {
+        tmp = *lstmoins;
+        *lstmoins = (*lstmoins)->next;
+        tmp->next = *lstplus;
+        *lstplus = tmp;
+    }
+	if (x == 'a')
+		write(1, "pa\n", 3);
+	if (x == 'b')
+		write(1, "pa\n", 3);
+}
