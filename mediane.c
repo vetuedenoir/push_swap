@@ -33,6 +33,7 @@ int	ft_mediane(t_list *lst)
 		mediane = (tab[index.k / 2] + tab[index.k / 2 + 1]) / 2;
 	else
 		mediane = tab[index.k / 2 + 1];
+	free(tab);
 	return (mediane);
 }
 
