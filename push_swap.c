@@ -12,20 +12,161 @@
 
 #include "push_swap.h"
 
-int	ft_veriftri(t_list *lst)
+int		majorant(t_list *a, t_list *b)
 {
-	int	r;
+	int	difference;
 
-	while (lst)
+	difference =  *(int *)(a->content) - *(int *)(b->content);
+	if (difference < 0)
+		difference = INT_MAX;
+	while (a != NULL ||	difference == 1)
 	{
-		r = *(int *)(lst->content);
-		lst = lst->next;
-		if (lst == NULL)
-			break ;
-		if (r > *(int *)(lst->content))
-			return (0);
+		if (*(int *)(a->content) > *(int *)(b->content) 
+			&& *(int *)(a->content) - *(int *)(b->content) < difference)
+			difference =  *(int *)(a->content) - *(int *)(b->content);
+		a = a->next;
 	}
-	return (1);
+	return (*(int *)(a->content));
+}
+
+int		ft_pos(t_list *lst, t_list *node)
+{
+	int	i;
+
+	i = 0;
+	while (lst != node)
+	{
+		lst = lst->next;
+		i++;
+	}
+}
+
+t_mouvement	ft_calcule1(int nba, int nbb)
+{
+	t_mouvement mouv;
+
+	init(mouv);
+	if (nba > nbb)
+	{
+		mouv.rr = nbb;
+		mouv.ra = nba - nbb;
+		mouv.total = mouv.rr + mouv.ra;
+	}
+	else if (nba <= nbb)
+	{
+		mouv.rr = nbb;
+		mouv.rb = nbb - nba;
+		mouv.total = mouv.rr + mouv.rb;
+	}
+	return (mouv);
+}
+
+t_mouvement	ft_calcule2(int nba, int nbb)
+{
+	t_mouvement	mouv;
+
+	init(mouv);
+	if (nba > nbb)
+	{
+		mouv.rrr = nbb;
+		mouv.rra = nba - nbb;
+		mouv.total = mouv.rrr + mouv.rra;
+	}
+	else if (nba <= nbb)
+	{
+		mouv.rrr = nbb;
+		mouv.rrb = nbb - nba;
+		mouv.total = mouv.rrr + mouv.rrb;
+	}
+	return (mouv);
+}
+
+t_mouvement	ft_calcule3(int nba, int nbb, t_data data)
+{
+	t_mouvement mouv;
+
+	init(mouv);
+}
+
+t_mouvement	ft_nbcoup(t_list *a, t_list *b, t_data coup, t_list *node)
+{
+	int	nbcoupa;
+	int	nbcoupb;
+
+	if (coup.sizea / 2 >= coup.posa - 1 && coup.sizeb / 2 >= coup.posb - 1)
+	{
+		nbcoupa = coup.posa - 1; 				// rotate
+		nbcoupb = coup.posb - 1; 				// rotate
+		return (ft_calcule1(coup.posa - 1, coup.posb - 1));
+	}
+	else if (coup.sizea / 2 < coup.posa - 1 && coup.sizeb / 2 < coup.posb - 1)
+	{
+		nbcoupa = coup.sizea - coup.posa + 1;	// reverse_rotate
+		nbcoupb = coup.sizeb - coup.posb + 1;	// reverse_rotate
+	}
+	else if (coup.sizea / 2 >= coup.posa - 1 && coup.sizeb / 2 < coup.posb - 1)
+	{
+		nbcoupa = coup.posa - 1;				// rotate
+		nbcoupb = coup.sizeb - coup.posb + 1;	// reverse_rotate
+	}
+	else if (coup.sizea / 2 < coup.posa - 1 && coup.sizeb / 2 >= coup.posb - 1)
+	{
+		nbcoupa = coup.sizea - coup.posa + 1;	// reverse_rotate
+		nbcoupb = coup.posb - 1;				// rotate;
+	}
+}
+
+t_list	the_chosen_one(t_list **a, t_list **b)
+{
+	t_list		*bx;
+	t_list		*chosen;
+	t_mouvement	action;
+	t_mouvement	tmp;
+	t_data		data;
+
+	bx = *b;
+	data.sizea = lstsize(*a);
+	data.sizeb = lstsize(*b);
+	data.posa = ft_pos(*a, majorant(*a, *b));
+	data.posb = ft_pos(*b, bx);
+	action = ft_nbcoup(*a, *b, data, bx);
+	while (bx != NULL || action.total == 0)
+	{	
+		data.posa = ft_pos(*a, majorant(*a, *b));
+		data.posb = ft_pos(*b, bx);
+		tmp = ft_nbcoup(*a, *b, data, bx);
+		if (tmp.total < action.total )
+		{
+			action = tmp;
+			chosen = bx;
+		}
+		bx = bx->next;
+	}
+	ft_action(a, b , action);
+}
+
+void	to_the_top(t_list **a, t_list *majorant)
+{
+	int	i;
+	t_list	*node;
+
+	i = 0;
+	node = *a;
+	while (node != majorant)
+	{
+		node = node->next;
+		i++;
+	}
+	if (lst_size(*a) / 2 >= i - 1)
+	{
+		while (*a != majorant)
+			rotate(a, 'a');
+	}
+	else
+	{
+		while (*a != majorant)
+			reverse_rotate(a, 'a');
+	}
 }
 
 void	ft_pretri(t_list **a, t_list **b)
@@ -37,121 +178,24 @@ void	ft_pretri(t_list **a, t_list **b)
 
 	i = 0;
 	x = 0;
-	print_pile_ab(*a, *b);
 	mediane = ft_mediane(*a);
 	bigest = ft_bigest(*a);
-	//while (*a != NULL)
-	while (*(int *)((*a)->content) != bigest)
+	while (*a != NULL)
 	{
 		if (*(int *)((*a)->content) != bigest)
 		{
 			pushpm(b, a, 'b');
-			print_pile_ab(*a, *b);
 			if (*(int *)((*b)->content) < mediane && i)
-			{
 				rotate(b, 'b');
-				print_pile_ab(*a, *b);
-			}
-					i++;
+			i++;
 		}
+		else if (x++ == 0)
+			rotate(a, 'a');
 		else
-		{
-			if (!x)
-			{
-				rotate(a, 'a');
-				print_pile_ab(*a, *b);
-			}
-			else
-				break ;
-			x++;
+			break ;
 		}
-	}}
-
-
-/*
-void    ft_pretri(t_list **list_a, t_list **list_b)
-{
-    t_list    *node;
-    t_list    *max_node;
-    int        max_value;
-    int		mediane;
-    
-
-	mediane = ft_mediane(*list_a);
-    node = *list_a;
-    max_node = node;
-    max_value = *(int *)node->content;
-    while (node != NULL)
-    // On parcourt la liste jusqu'à trouver l'élément ayant la valeur maximale
-    {
-        if (*(int *)node->content > max_value)
-        {
-            max_node = node;
-            max_value = *(int *)node->content;
-        }
-        node = node->next;
-    }
-    node = *list_a; //reset
-
-    while (*list_a != NULL)
-       {
-        if (*list_a != max_node)
-        {
-            pushpm(list_b, list_a, 'b');
-	    print_pile_ab(*list_a, *list_b);
-            if (*(int *)(*list_b)->content < mediane)
-            {
-	    	rotate(list_b, 'b');
-		print_pile_ab(*list_a, *list_b);
-	    }
-        }
-        else
-            break ;
-    }
-    *list_a = max_node;
-    // On remet l'élément ayant la valeur maximale en tête de list_a
-    rotate(list_a, 'a');
-    print_pile_ab(*list_a, *list_b);
-}
-*/
-
-
-static void	three_operation(t_list **a, int one, int two, int three)
-{
-	if (one > two && two > three)
-	{
-		swap(a, 'a');
-		reverse_rotate(a, 'a');
-	}
-	else if (one < two && one < three && three < two)
-	{
-		swap(a, 'a');
-		rotate(a, 'a');
-	}
-	else if (one > two && one > three)
-		rotate(a, 'a');
-	else if (three < one && three < two)
-		reverse_rotate(a, 'a');
-	else if (one > two && one < three)
-		swap(a, 'a');
 }
 
-void	ft_algothree(t_list **a)
-{
-	int	one;
-	int	two;
-	int	three;
-	t_list	*first;
-
-	first = *a;
-	one = *(int *)((*a)->content);
-	*a = (*a)->next;
-	two = *(int *)((*a)->content);
-	*a = (*a)->next;
-	three = *(int *)((*a)->content);
-	*a = first;
-	three_operation(a, one, two, three);
-}
 
 void	ft_push_swap(t_list **a, t_list **b, int size)
 {
@@ -160,7 +204,10 @@ void	ft_push_swap(t_list **a, t_list **b, int size)
 	if (size == 3)
 		ft_algothree(a);
 	if (size >= 4)
+	{
 		ft_pretri(a, b);
+		
+	}
 }
 
 int	main(int argc, char *argv[])

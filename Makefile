@@ -20,7 +20,8 @@ SRC = push_swap \
 	rotate \
 	swap \
 	mediane \
-	fusion
+	fusion \
+	minialgo
 	
 
 OBJ = $(addsuffix .o, ${SRC})

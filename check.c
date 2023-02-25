@@ -86,7 +86,8 @@ int	ft_check_nbr(char **argument)
 	while (argument[x])
 	{
 		y = 0;
-		if (argument[x][y] == '-')
+		if ((argument[x][y] == '-' || argument[x][y] == '+')
+			&& argument[x][y + 1] && ft_isdigit(argument[x][y + 1]))
 			y++;
 		while (argument[x][y])
 		{

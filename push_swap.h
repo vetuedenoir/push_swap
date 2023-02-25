@@ -25,6 +25,25 @@ typedef struct s_index
 	int	k;
 }			t_index;
 
+typedef struct s_data
+{
+	int	posa;
+	int	posb;
+	int	sizea;
+	int	sizeb;
+}			t_data;
+
+typedef struct s_mouvement
+{
+	int	rr;
+	int	rrr;
+	int	ra;
+	int	rb;
+	int	rra;
+	int rrb;
+	int	total;
+}			t_mouvement;
+
 t_list	*ft_all_check(char **argument, int argc);
 int		ft_check_doublons(t_list *lst);
 t_list	*ft_transfo(char **argument);
