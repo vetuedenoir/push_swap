@@ -1,45 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   calcule.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/17 11:25:00 by kscordel          #+#    #+#             */
-/*   Updated: 2023/02/27 19:37:01 by kscordel         ###   ########.fr       */
+/*   Created: 2023/02/28 16:16:45 by kscordel          #+#    #+#             */
+/*   Updated: 2023/02/28 16:16:52 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-int		majorant(t_list *a, t_list *b)
-{
-	int	difference;
-
-	difference =  *(int *)(a->content) - *(int *)(b->content);
-	if (difference < 0)
-		difference = INT_MAX;
-	while (a != NULL ||	difference == 1)
-	{
-		if (*(int *)(a->content) > *(int *)(b->content) 
-			&& *(int *)(a->content) - *(int *)(b->content) < difference)
-			difference =  *(int *)(a->content) - *(int *)(b->content);
-		a = a->next;
-	}
-	return (*(int *)(a->content));
-}
-
-int		ft_pos(t_list *lst, t_list *node)
-{
-	int	i;
-
-	i = 0;
-	while (lst != node)
-	{
-		lst = lst->next;
-		i++;
-	}
-}
+#include "push_swap.c"
 
 t_mouvement	ft_calcule1(int nba, int nbb)
 {
@@ -81,12 +52,71 @@ t_mouvement	ft_calcule2(int nba, int nbb)
 	return (mouv);
 }
 
-t_mouvement	ft_calcule3(int nba, int nbb, t_data data)
+t_mouvement	sub_calcule1(int nba, int nbb, t_data data, int inversex)
 {
 	t_mouvement mouv;
 
 	init(mouv);
-	
+	if (inversex < nba + nbb)
+	{
+		if (inversex == data.sizea - nba)
+		{
+			mouv.rrr = nbb;
+			mouv.ra = data.sizea - nba - nbb;
+		}
+		if (inversex == data.sizeb - nbb)
+		{
+			mouv.rr = nba;
+			mouv.rb = data.sizeb - nbb - nba;
+		}
+	}
+	else
+	{
+		mouv.ra = nba;
+		mouv.rrb = nbb;
+	}
+	return (mouv);
+}
+
+t_mouvement	sub_calcule2(int nba, int nbb, t_data data, int inversex)
+{
+	t_mouvement mouv;
+
+	init(mouv);
+	if (inversex < nba + nbb)
+	{
+		if (inversex == data.sizea - nba)
+		{
+			mouv.rr = nbb;
+			mouv.ra = data.sizea - nba - nbb;
+		}
+		if (inversex == data.sizeb - nbb)
+		{
+			mouv.rrr = nba;
+			mouv.rb = data.sizeb - nbb - nba;
+		}
+	}
+	else
+	{
+		mouv.ra = nba;
+		mouv.rrb = nbb;
+	}
+	return (mouv);
+}
+
+t_mouvement	ft_calcule3(int nba, int nbb, t_data data, char x)
+{
+	int	inversex;
+
+	inversex = 0;
+	if (data.sizea - nba > data.sizeb - nbb)
+		inversex = data.sizeb - nbb;
+	else if (data.sizea - nba <= data.sizeb - nbb)
+		inversex = data.sizea - nba;
+	if (x = '1')
+		return (sub_calcule1(nba, nbb, data, inversex));
+	if (x = '2')
+		return (sub_calcule2(nba, nbb, data, inversex));
 }
 
 t_mouvement	ft_nbcoup(t_list *a, t_list *b, t_data coup, t_list *node)
@@ -104,16 +134,19 @@ t_mouvement	ft_nbcoup(t_list *a, t_list *b, t_data coup, t_list *node)
 	{
 		nbcoupa = coup.sizea - coup.posa + 1;	// reverse_rotate
 		nbcoupb = coup.sizeb - coup.posb + 1;	// reverse_rotate
+		return (ft_calcule2(coup.sizea - coup.posa + 1, coup.sizeb - coup.posb + 1));
 	}
 	else if (coup.sizea / 2 >= coup.posa - 1 && coup.sizeb / 2 < coup.posb - 1)
 	{
 		nbcoupa = coup.posa - 1;				// rotate
 		nbcoupb = coup.sizeb - coup.posb + 1;	// reverse_rotate
+		return (ft_calcule3(coup.posa - 1, coup.sizeb - coup.posb + 1, coup, '1'));
 	}
 	else if (coup.sizea / 2 < coup.posa - 1 && coup.sizeb / 2 >= coup.posb - 1)
 	{
 		nbcoupa = coup.sizea - coup.posa + 1;	// reverse_rotate
 		nbcoupb = coup.posb - 1;				// rotate;
+		return (ft_calcule3(coup.sizea - coup.posa + 1, coup.posb - 1, coup, '2'));
 	}
 }
 
@@ -144,91 +177,4 @@ t_list	the_chosen_one(t_list **a, t_list **b)
 		bx = bx->next;
 	}
 	ft_action(a, b , action);
-}
-
-void	to_the_top(t_list **a, t_list *majorant)
-{
-	int	i;
-	t_list	*node;
-
-	i = 0;
-	node = *a;
-	while (node != majorant)
-	{
-		node = node->next;
-		i++;
-	}
-	if (lst_size(*a) / 2 >= i - 1)
-	{
-		while (*a != majorant)
-			rotate(a, 'a');
-	}
-	else
-	{
-		while (*a != majorant)
-			reverse_rotate(a, 'a');
-	}
-}
-
-void	ft_pretri(t_list **a, t_list **b)
-{
-	int	mediane;
-	int	bigest;
-	int	i;
-	int	x;
-
-	i = 0;
-	x = 0;
-	mediane = ft_mediane(*a);
-	bigest = ft_bigest(*a);
-	while (*a != NULL)
-	{
-		if (*(int *)((*a)->content) != bigest)
-		{
-			pushpm(b, a, 'b');
-			if (*(int *)((*b)->content) < mediane && i)
-				rotate(b, 'b');
-			i++;
-		}
-		else if (x++ == 0)
-			rotate(a, 'a');
-		else
-			break ;
-		}
-}
-
-
-void	ft_push_swap(t_list **a, t_list **b, int size)
-{
-	if (size == 2)
-		swap(a, 'a');
-	if (size == 3)
-		ft_algothree(a);
-	if (size >= 4)
-	{
-		ft_pretri(a, b);
-		
-	}
-}
-
-int	main(int argc, char *argv[])
-{
-	t_list	*a;
-	t_list	*b;
-	int	size;
-
-	a = NULL;
-	b = NULL;
-	if (argc == 1)
-		exit (0);
-	a = ft_all_check(argv, argc);
-	if (!a)
-		ft_putstr_fd("Error\n", 2);
-	if (ft_veriftri(a))
-		return (free_lc(&a), 1);
-	size = ft_lstsize(a);
-	ft_push_swap(&a, &b, size);
-	print_pile_ab(a, b);
-	free_lc(&a);
-	exit (0);
 }
