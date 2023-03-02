@@ -12,29 +12,36 @@
 
 NAME = push_swap
 
-SRC = push_swap \
-	check \
-	utils \
-	push \
-	reverse_rotate \
-	rotate \
-	swap \
-	mediane \
-	fusion \
-	minialgo
+SRC = src/push_swap \
+	src/check \
+	src/utils \
+	src/push \
+	src/reverse_rotate \
+	src/rotate \
+	src/swap \
+	src/mediane \
+	src/fusion \
+	src/minialgo \
+	src/b_to_a \
+	src/calcule \
+	src/init
 	
 
-OBJ = $(addsuffix .o, ${SRC})
+#OBJ = $(addsuffix .o, ${SRC})
+obj = $(SRC:src/%.c=obj/%.o) obj/main.o
 CC = cc 
-HEADER = .
+HEADER = src/push_swap.h
 FLAGS = -Wall -Werror -Wextra -g3
 LIBFT_DIR = ./libft/libft.a
 LIBFT_DIR1 = libft/
 
 all: $(NAME)
 
-%.o:%.c
+obj/%.o: src/%.c
 	$(CC) -c $(FLAGS) $< -o $@ -I${HEADER}
+
+obj/main.o: main.c $(HEADERS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): ${LIBFT_DIR}libft.a ${OBJ}
 		cp ${LIBFT_DIR1}libft.a ./${NAME}
@@ -46,7 +53,7 @@ ${LIBFT_DIR}libft.a:
 		make -C ${LIBFT_DIR1}
 clean:
 		rm -f ${OBJ}
-		make clean -C ${LIBFT_DIR1}		
+		make clean -C ${LIBFT_DIR1}		gi
 fclean: clean
 		rm -f $(NAME)
 		make fclean -C ${LIBFT_DIR1}
