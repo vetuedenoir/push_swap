@@ -19,7 +19,7 @@ t_list		*majorant(t_list *a, t_list *node)
 	difference =  *(int *)(a->content) - *(int *)(node->content);
 	if (difference < 0)
 		difference = INT_MAX;
-	while (a != NULL ||	difference == 1)
+	while (a != NULL &&	difference == 1)
 	{
 		if (*(int *)(a->content) > *(int *)(node->content) 
 			&& *(int *)(a->content) - *(int *)(node->content) < difference)
@@ -33,8 +33,8 @@ int		ft_pos(t_list *lst, t_list *node)
 {
 	int	i;
 
-	i = 0;
-	while (lst != node)
+	i = 1;
+	while (lst != node && lst->next != NULL)
 	{
 		lst = lst->next;
 		i++;
@@ -84,7 +84,7 @@ void	ft_push_swap(t_list **a, t_list **b, int size)
 	if (size >= 4)
 	{
 		ft_pretri(a, b);
-		while (b != NULL)
+		while (*b != NULL)
 			the_chosen_one(a, b);
 		//finish(a, b);
 	}

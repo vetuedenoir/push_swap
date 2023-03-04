@@ -5,23 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kscordel <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/17 17:20:46 by kscordel          #+#    #+#             */
-/*   Updated: 2023/02/04 19:15:20 by kscordel         ###   ########.fr       */
+/*   Created: 2023/03/04 14:37:29 by kscordel          #+#    #+#             */
+/*   Updated: 2023/03/04 14:37:31 by kscordel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-void	*free_tt(char **ts)
-{
-	int	x;
-
-	x = 0;
-	while (ts[x])
-		free(ts[x++]);
-	free(ts);
-	return (NULL);
-}
+#include "checker.h"
 
 void	free_lc(t_list **lst)
 {
@@ -67,49 +56,26 @@ long	ft_atol(const char *nptr)
 	return (nbr * signe);
 }
 
-void	ft_print_lst(t_list *lst)
+void    ft_erreur(t_list **a, t_list **b)
 {
+    free_lc(a);
+    free_lc(b);
+    ft_putstr_fd("Error\n", 2);
+    exit (0);
+}
+
+int	ft_veriftri(t_list *lst)
+{
+	int	r;
+
 	while (lst)
 	{
-		ft_printf("%d\n", *(int *)(lst->content));
+		r = *(int *)(lst->content);
 		lst = lst->next;
+		if (lst == NULL)
+			break ;
+		if (r > *(int *)(lst->content))
+			return (0);
 	}
-}
-
-static t_list	*printbig(t_list *big, int t)
-{
-	while (t && big)
-	{
-		if (*(int *)(big->content) > 9999999 || *(int *)(big->content) < -999999)
-			ft_printf("\n%d\t| \n", *(int *)(big->content));
-		else
-			ft_printf("\n%d\t\t| \n", *(int *)(big->content));
-		big = big->next;
-		t--;
-	}
-	return (big);
-}
-
-void	print_pile_ab(t_list *a, t_list *b)
-{
-	int	ta;
-	int	tb;
-
-	ta = ft_lstsize(a);
-	tb = ft_lstsize(b);
-	if (ta - tb > 0)
-		a = printbig(a, ta - tb); 
-	else if (tb - ta > 0)
-		b = printbig(b, tb - ta);
-	while (a && b)
-	{
-		if (*(int *)(a->content) > 9999999 || *(int *)(a->content) < -999999)
-			printf("\n%d\t| %d\n", *(int *)(a->content), *(int *)(b->content));
-		else
-			printf("\n%d\t\t| %d\n", *(int *)(a->content), *(int *)(b->content));
-		a = a->next;
-		b = b->next;
-	}
-	ft_printf("\nPile a\t\t| Pile b\n");
-	ft_printf("-----------------------------------------\n\n");
+	return (1);
 }

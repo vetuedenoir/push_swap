@@ -32,7 +32,7 @@ t_data	init_data(t_list *a, t_list *b, t_list *node)
 
 	data.sizea = ft_lstsize(a);
 	data.sizeb = ft_lstsize(b);
-	data.posa = ft_pos(a, majorant(a, b));
+	data.posa = ft_pos(a, majorant(a, node));
 	data.posb = ft_pos(b, node);
 	return (data);
 }
