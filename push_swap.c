@@ -19,7 +19,7 @@ t_list		*majorant(t_list *a, t_list *node)
 	difference =  *(int *)(a->content) - *(int *)(node->content);
 	if (difference < 0)
 		difference = INT_MAX;
-	while (a != NULL &&	difference == 1)
+	while (a != NULL &&	difference != 1)
 	{
 		if (*(int *)(a->content) > *(int *)(node->content) 
 			&& *(int *)(a->content) - *(int *)(node->content) < difference)

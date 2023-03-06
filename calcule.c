@@ -132,7 +132,8 @@ t_mouvement	ft_calcule3(int nba, int nbb, t_data data, char x)
 		m.rra = nba;
 		m.rb = nbb;
 	}
-
+	inversex = data.posa;
+	return (m);
 /*
 	if (data.sizea - nba > data.sizeb - nbb)
 		inversex = data.sizeb - nbb;
