@@ -16,7 +16,7 @@ t_mouvement	ft_calcule1(int nba, int nbb)
 {
 	t_mouvement mouv;
 
-	//ft_printf("nba = %d et nbb = %d\n", nba, nbb);
+	ft_printf("calcule 1 : nba = %d et nbb = %d\n\n", nba, nbb);
 	mouv = init_mouvement();
 	if (nba > nbb)
 	{
@@ -37,7 +37,7 @@ t_mouvement	ft_calcule2(int nba, int nbb)
 {
 	t_mouvement	mouv;
 
-	//ft_printf("nba = %d et nbb = %d\n", nba, nbb);
+	ft_printf("calcule 2 : nba = %d et nbb = %d\n\n", nba, nbb);
 	mouv = init_mouvement();
 	if (nba > nbb)
 	{
@@ -58,7 +58,7 @@ t_mouvement	sub_calcule1(int nba, int nbb, t_data data, int inversex)
 {
 	t_mouvement mouv;
 
-	//ft_printf("nba = %d et nbb = %d\n", nba, nbb);
+	ft_printf("nba = %d et nbb = %d\n", nba, nbb);
 	mouv = init_mouvement();
 	if (inversex < nba + nbb)
 	{
@@ -88,7 +88,7 @@ t_mouvement	sub_calcule2(int nba, int nbb, t_data data, int inversex)
 {
 	t_mouvement mouv;
 
-	//ft_printf("nba = %d et nbb = %d\n", nba, nbb);
+	ft_printf("nba = %d et nbb = %d\n", nba, nbb);
 	mouv = init_mouvement();
 	if (inversex < nba + nbb)
 	{
@@ -119,6 +119,7 @@ t_mouvement	ft_calcule3(int nba, int nbb, t_data data, char x)
 	int	inversex;
 	t_mouvement m;
 	inversex = 0;
+	ft_printf("calcule 3 nba = %d et nbb = %d\n\n", nba, nbb);
 //pour les testes
 	if (x == '1')
 	{

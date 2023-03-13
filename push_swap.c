@@ -15,7 +15,9 @@
 t_list		*majorant(t_list *a, t_list *node)
 {
 	int	difference;
+	t_list	*majorant;
 
+	majorant = a;
 	difference =  *(int *)(a->content) - *(int *)(node->content);
 	if (difference < 0)
 		difference = INT_MAX;
@@ -23,10 +25,15 @@ t_list		*majorant(t_list *a, t_list *node)
 	{
 		if (*(int *)(a->content) > *(int *)(node->content) 
 			&& *(int *)(a->content) - *(int *)(node->content) < difference)
+		{
 			difference =  *(int *)(a->content) - *(int *)(node->content);
+			majorant = a; 
+		}
 		a = a->next;
 	}
-	return (a);
+	/*if (majorant != NULL && node != NULL)
+	*///	printf("majorant = %d et node = %d \n\n", *(int *)(majorant->content) ,*(int *)(node->content));
+	return (majorant);
 }
 
 int		ft_pos(t_list *lst, t_list *node)

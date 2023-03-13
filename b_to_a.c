@@ -94,11 +94,8 @@ void    ft_action(t_list **a, t_list **b, t_mouvement action)
     while (action.rrr-- > 0 )
         rreverse_rrotate(a, b);
     while (action.rr-- > 0)
-	{
-		//ft_printf("rrr = %d\nrr = %d \nra = %d \n rb = %d\nrra = %d\nrrb = %d\n", action.rrr, action.rr, action.ra, action.rb, action.rra, action.rrb );
+	{	//ft_printf("rrr = %d\nrr = %d \nra = %d \n rb = %d\nrra = %d\nrrb = %d\n", action.rrr, action.rr, action.ra, action.rb, action.rra, action.rrb );
 		rrotate(a, b);
-		if (action.rr < 0)
-			break ;
 	}  
     while (action.ra-- > 0)
         rotate(a, 'a');

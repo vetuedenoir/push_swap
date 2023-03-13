@@ -32,7 +32,7 @@ int	main(int argc, char *argv[])
 		return (free_lc(&a), 1);
 	size = ft_lstsize(a);
 	ft_push_swap(&a, &b, size);
-	//print_pile_ab(a, b);
+	print_pile_ab(a, b);
 	free_lc(&a);
 	exit (0);
 }
