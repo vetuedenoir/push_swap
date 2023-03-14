@@ -84,6 +84,9 @@ void	finish(t_list **a, t_list **b)
 */
 void	ft_push_swap(t_list **a, t_list **b, int size)
 {
+	int	i;
+
+	i = 0;
 	if (size == 2)
 		swap(a, 'a');
 	if (size == 3)
@@ -92,7 +95,11 @@ void	ft_push_swap(t_list **a, t_list **b, int size)
 	{
 		ft_pretri(a, b);
 		while (*b != NULL)
+		{
+			//printf("------------- %d --------------\n\n", i);
 			the_chosen_one(a, b);
+			i++;
+		}
 		//finish(a, b);
 	}
 }

@@ -16,7 +16,7 @@ t_mouvement	ft_calcule1(int nba, int nbb)
 {
 	t_mouvement mouv;
 
-	ft_printf("calcule 1 : nba = %d et nbb = %d\n\n", nba, nbb);
+	//ft_printf("calcule 1 : nba = %d et nbb = %d\n\n", nba, nbb);
 	mouv = init_mouvement();
 	if (nba > nbb)
 	{
@@ -26,7 +26,7 @@ t_mouvement	ft_calcule1(int nba, int nbb)
 	}
 	else if (nba <= nbb)
 	{
-		mouv.rr = nbb;
+		mouv.rr = nba;
 		mouv.rb = nbb - nba;
 		mouv.total = mouv.rr + mouv.rb;
 	}
@@ -37,7 +37,7 @@ t_mouvement	ft_calcule2(int nba, int nbb)
 {
 	t_mouvement	mouv;
 
-	ft_printf("calcule 2 : nba = %d et nbb = %d\n\n", nba, nbb);
+	//ft_printf("calcule 2 : nba = %d et nbb = %d\n\n", nba, nbb);
 	mouv = init_mouvement();
 	if (nba > nbb)
 	{
@@ -47,7 +47,7 @@ t_mouvement	ft_calcule2(int nba, int nbb)
 	}
 	else if (nba <= nbb)
 	{
-		mouv.rrr = nbb;
+		mouv.rrr = nba;
 		mouv.rrb = nbb - nba;
 		mouv.total = mouv.rrr + mouv.rrb;
 	}
@@ -58,7 +58,7 @@ t_mouvement	sub_calcule1(int nba, int nbb, t_data data, int inversex)
 {
 	t_mouvement mouv;
 
-	ft_printf("nba = %d et nbb = %d\n", nba, nbb);
+	//ft_printf("nba = %d et nbb = %d\n", nba, nbb);
 	mouv = init_mouvement();
 	if (inversex < nba + nbb)
 	{
@@ -88,7 +88,7 @@ t_mouvement	sub_calcule2(int nba, int nbb, t_data data, int inversex)
 {
 	t_mouvement mouv;
 
-	ft_printf("nba = %d et nbb = %d\n", nba, nbb);
+	//ft_printf("nba = %d et nbb = %d\n", nba, nbb);
 	mouv = init_mouvement();
 	if (inversex < nba + nbb)
 	{
@@ -119,16 +119,20 @@ t_mouvement	ft_calcule3(int nba, int nbb, t_data data, char x)
 	int	inversex;
 	t_mouvement m;
 	inversex = 0;
-	ft_printf("calcule 3 nba = %d et nbb = %d\n\n", nba, nbb);
+	//ft_printf("calcule 3 nba = %d et nbb = %d\t", nba, nbb);
 //pour les testes
+	m = init_mouvement();
 	if (x == '1')
 	{
+		//ft_printf("x = 1\n\n");
 		m.total = nba + nbb;
 		m.ra = nba;
 		m.rrb = nbb;
 	}
 	if (x == '2')
 	{
+
+		//ft_printf("x = 2\n\n");
 		m.total = nba + nbb;
 		m.rra = nba;
 		m.rb = nbb;

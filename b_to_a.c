@@ -126,7 +126,7 @@ void	the_chosen_one(t_list **a, t_list **b)
 		data.posb = ft_pos(*b, bx);
 		tmp = ft_nbcoup(data);
 		//printf("posa = %d \n posb = %d \n sizea = %d \n sizeb = %d \n\n", data.posa, data.posb, data.sizea, data.sizeb);
-		//ft_printf("rrr = %d\nrr = %d \nra = %d \n rb = %d\nrra = %d\nrrb = %d\n\n", action.rrr, action.rr, action.ra, action.rb, action.rra, action.rrb );
+		//ft_printf("rrr = %d\nrr = %d \nra = %d \n rb = %d\nrra = %d\nrrb = %d\n\n", tmp.rrr, tmp.rr, tmp.ra, tmp.rb, tmp.rra, tmp.rrb );
 		if (tmp.total < action.total)
 			action = tmp;
 		bx = bx->next;
