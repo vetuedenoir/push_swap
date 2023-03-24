@@ -6,7 +6,7 @@
 #    By: kscordel <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 18:41:01 by kscordel          #+#    #+#              #
-#    Updated: 2023/03/20 18:41:14 by kscordel         ###   ########.fr        #
+#    Updated: 2023/03/24 19:11:08 by kscordel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,9 @@ all: $(NAME)
 $(NAME): $(OBJS) $(OBJS_COMMON) | lib
 	$(CC) $(CFLAGS) $(OBJS) $(OBJS_COMMON) $(LIBPATH) -o $@
 	
-bonus: $(OBJB) $(OBJS_COMMON) | lib
+bonus: $(BNAME)
+
+$(BNAME): $(OBJB) $(OBJS_COMMON) | lib
 	$(CC) $(CFLAGS) $^ $(LIBPATH) -o $(BNAME) 
 
 lib:
