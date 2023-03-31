@@ -84,7 +84,7 @@ long	ft_atol(const char *nptr)
 			signe *= -1;
 		i++;
 	}
-	while (nptr[i] >= '0' && nptr[i] <= '9' && s < 15)
+	while (nptr[i] >= '0' && nptr[i] <= '9' && s < 19)
 	{
 		nbr = nbr * 10 + (nptr[i] - 48);
 		i++;
