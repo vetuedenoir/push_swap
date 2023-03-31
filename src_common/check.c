@@ -34,10 +34,14 @@ int	*ft_convert(const char *str)
 {
 	long	l;
 	int		*nbr;
+	int		i;
 
 	if (str == NULL)
 		return (NULL);
-	l = ft_atol(str);
+	i = 0;
+	while (str[i] == '0')
+		i++;
+	l = ft_atol(&str[i]);
 	if (l < INT_MIN || l > INT_MAX)
 		return (NULL);
 	nbr = malloc(sizeof(int) * 1);
